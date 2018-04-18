@@ -1,0 +1,5 @@
+account/*.key
+account/private/UTC-*
+datastore/*
+private/*.key
+software
