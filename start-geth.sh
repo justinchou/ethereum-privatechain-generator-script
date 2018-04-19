@@ -10,7 +10,7 @@ DATADIR=./datastore
 PASSFILE=account.password
 
 SCRIPT="--datadir ${DATADIR} --password ${PASSFILE} --port ${PORT} --rpc --rpcaddr "0.0.0.0" -rpcapi "${RPCAPI}" --rpcport ${RPCPORT} --networkid ${NETWORKID} --lightkdf --nodiscover --maxpeers 0 --verbosity 6 --pprof --pprofport ${PPROFPORT}"
-ARGVS="$@ > ./${DATADIR}/logs/geth.log 2>&1 "
+ARGVS="$@ > ./${DATADIR}/logs/geth.log 2>&1 &"
 
 GETH=/usr/bin/geth
 if [ ! -f ${GETH} ]; then

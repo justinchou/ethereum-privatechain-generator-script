@@ -24,9 +24,9 @@ It Will Generate An Account Start Wtth '0x' And Length Is 40 (Without '0x').
 
 2. Start The Server
 
-`sh start.sh --mine --unlock 0xACCOUNT_GENERATED_IN_UPPER_STEP_01`
+`sh start-geth.sh --mine --unlock 0xACCOUNT_GENERATED_IN_UPPER_STEP_01`
 
-The `start.sh` Script Support All Geth Params, But Some Of Them Included In The Script By Default.
+The `start-geth.sh` Script Support All Geth Params, But Some Of Them Included In The Script By Default.
 
 _0xACCOUNT_GENERATED_IN_UPPER_STEP_01_ Is The Account Generated In The First Step.
 
@@ -60,7 +60,7 @@ See [Quick Start](#quick-start)
 
 You May Do This Several Times For Generate Multi Accounts.
 
-* `start.sh` Start A Private Block Chain
+* `start-geth.sh` Start A Private Block Chain
 
 See [Quick Start](#quick-start)
 
@@ -72,3 +72,21 @@ Notice: The Imported Key's Password Need To Match That In File `account.password
 **OR** The Imported Account Will Not Show In The `personal.listAccounts`
 
 
+
+## Make Sure Geth Alive!
+
+Use Supervisor To Make Sure That The Geth Press Alive~
+
+### Start The Supervisor Daemon
+
+```sh start-supervisord.sh```
+
+By Default, It Use The `supervisord.conf`
+
+If The Geth Process Printed, Then Start Success
+
+### Stop The Supervisor Daemon
+
+```sh stop-supervisord.sh```
+
+If Nothing Printed, Then Stop Success
