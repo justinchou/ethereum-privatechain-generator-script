@@ -10,6 +10,8 @@ Generate A Private Block Chain With Scripts, With Default Account Auto Generate 
 * Node.JS 8.11+ (Or Lower Version But Without Test For Sure.)
 * Bash Shell
 * Geth
+* Python 2.7.x+ (not Python 3.x)
+* Supervisor
 
 
 ## Quick Start
@@ -90,3 +92,13 @@ If The Geth Process Printed, Then Start Success
 ```sh stop-supervisord.sh```
 
 If Nothing Printed, Then Stop Success
+
+### Manage The Sub Process [Start|Restart...]
+
+```supervisorctl -c supervisord.conf```
+
+Enter The Interaction Shell, Then Type `help` For More Instructions.
+
+
+
+
