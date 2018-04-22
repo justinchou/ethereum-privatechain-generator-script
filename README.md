@@ -7,12 +7,14 @@ Generate A Private Block Chain With Scripts, With Default Account Auto Generate 
 
 ### Dependency
 
-* Node.JS 8.11+ (Or Lower Version But Without Test For Sure.)
+* [Node.JS](https://nodejs.org/en/download/) 8.11+ (Or Lower Version But Without Test For Sure.)
 * Bash Shell
-* Geth
-* Python 2.7.x+ (not Python 3.x)
-* Supervisor
+* [Geth](https://geth.ethereum.org/downloads/)
+* [Python](https://www.python.org/downloads/) 2.7.x+ (not Python 3.x)
+* [Supervisor](https://pypi.org/project/supervisor/), Install With `easy_install`, `pip` Or `setup.py`
 
+After Instalallation, Make Sure To Put `node`/`npm`, `geth`/`swarm`, 
+`python`/`easy_install`/`pip`/`supervisord`/`supervisorctl` Are In The `PATH`.
 
 ## Quick Start
 
