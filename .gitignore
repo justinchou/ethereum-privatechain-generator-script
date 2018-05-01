@@ -1,6 +1,8 @@
-account/*.key
-account/private/UTC-*
+account/public/*.key
+account/private/*.key
+account/keystore/UTC-*
 datastore/*
-private/*.key
 software
 genesis.json
+node_modules
+yarn-error.log
