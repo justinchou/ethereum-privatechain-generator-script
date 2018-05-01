@@ -11,10 +11,12 @@
 const Spawn = require('child_process').spawn;
 const Path = require('path');
 
+const GENESIS_FILE = Path.join(__dirname, '..', 'genesis.json');
+
 exports.debug = false;
 
 function genWallet(datadir, next) {
-    const args = ['init', Path.join(__dirname, 'genesis.json'), '--datadir', datadir];
+    const args = ['init', GENESIS_FILE, '--datadir', datadir];
     const genGethAccount = Spawn('geth', args);
 
     const stdout = [];

@@ -28,9 +28,9 @@ const Mkdirp = require('mkdirp');
 const Async = require('async');
 const Is = require('is');
 
-const genGenesis = require('./genGenesis').genGenesis;
-const genAccount = require('./genAccount').genAccount;
-const genWallet = require('./genWallet').genWallet;
+const genGenesis = require('./libs/genGenesis').genGenesis;
+const genAccount = require('./libs/genAccount').genAccount;
+const genWallet = require('./libs/genWallet').genWallet;
 
 
 

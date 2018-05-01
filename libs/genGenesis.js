@@ -35,7 +35,7 @@ const is = require('is');
 const PREFIX = '0x';
 const EXAMPLE = '0cd59780cc3da5f1d6866ede6dcc6dafbc24e3a2';
 const HEX_REGEX = /^0x[1-9a-f][0-9a-f]*$/;
-const GENESIS_FILE = Path.join(__dirname, 'genesis.json');
+const GENESIS_FILE = Path.join(__dirname, '..', 'genesis.json');
 
 const GETH_COIN = "0x821ab0d4414980000";
 
