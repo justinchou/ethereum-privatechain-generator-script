@@ -86,9 +86,9 @@ const getFilename = (src) => {
 
 /**
  * read json content from a file that match the name
- * @param filepath
- * @param nameRegex
- * @returns {null}
+ * @param {String} filepath
+ * @param {String} nameRegex
+ * @returns {Object|null}
  */
 const getJsonFromfile = (filepath, nameRegex) => {
     const utcFiles = Fs.readdirSync(filepath);
@@ -112,6 +112,12 @@ const getJsonFromfile = (filepath, nameRegex) => {
     return null;
 };
 
+/**
+ * find utc file in account & geth keystore folder which matches provided account, and load the json content
+ *
+ * @param {String} account
+ * @returns {Object} utc content
+ */
 const getUtcContent = (account) => {
     let filepath;
     let json;
@@ -176,11 +182,13 @@ for (let amtId = 0; amtId < amount; amtId++) {
                 process.exit()
             }
 
-            console.log('generating account %s', amtId);
+            console.log('generating account %s ....', amtId);
 
+            console.log('creating the utc file');
             const [, account] = stdout.match(GEN_ACCOUNT_RET_REGEX);
             Fs.writeFileSync(Path.join(accountdir, 'public', `account-${account}.key`), account);
 
+            console.log('creating the private key file');
             const utcContent = getUtcContent(account);
             const privateKey = PkUtils.getPrivateKeyFromKeystore(utcContent, password);
             Fs.writeFileSync(Path.join(accountdir, 'private', `private-${account}.key`), privateKey);

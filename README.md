@@ -20,15 +20,15 @@ After Instalallation, Make Sure To Put `node`/`npm`, `geth`/`swarm`,
 
 Get A Private Single Node Geth To Run:
 
-1. Init Genesis Block
+1. Init Genesis Block, With 3 Default Account Generated
 
-`sh init.sh`
+`node init.js -n 3`
 
-It Will Generate An Account Start Wtth '0x' And Length Is 40 (Without '0x').
+It Will Generate 3 Accounts Start Wtth '0x' And Length Is 40 (Without '0x').
 
 2. Start The Server
 
-`sh start-geth.sh --mine --unlock 0xACCOUNT_GENERATED_IN_UPPER_STEP_01`
+`sh start-geth.sh --mine --unlock 0`
 
 The `start-geth.sh` Script Support All Geth Params, But Some Of Them Included In The Script By Default.
 
