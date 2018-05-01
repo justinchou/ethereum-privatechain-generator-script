@@ -18,7 +18,6 @@ const GEN_ACCOUNT_RET_REGEX = /Address: {(.*?)}/;
 const UTC_REGEX = /^UTC--\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}.\d{9}Z--([0-9a-f]{40})$/;
 
 
-
 // ************************** REQUIRES **************************** //
 
 const Path = require('path');
@@ -27,11 +26,11 @@ const Fse = require('fs-extra');
 const Mkdirp = require('mkdirp');
 const Async = require('async');
 const Is = require('is');
+const PkUtils = require('ethereum-mnemonic-privatekey-utils');
 
 const genGenesis = require('./libs/genGenesis').genGenesis;
 const genAccount = require('./libs/genAccount').genAccount;
 const genWallet = require('./libs/genWallet').genWallet;
-
 
 
 // ************* Load Config From Interactive Shell *************** //
@@ -59,9 +58,17 @@ if (!Fs.existsSync(passfile)) {
     console.error('invalid password file');
     process.exit(1)
 }
+const passwords = Fs.readFileSync(passfile, {encoding: 'utf8'}).split(/[\r\n]/g);
+if (passwords.length <= 0 || !passwords[0]) {
+    console.error('invalid password file contents');
+    process.exit()
+}
+const password = passwords[0];
+if (password.indexOf('\n') !== -1) {
+    console.error('password file includes invalid format, only support 1 line password!');
+}
 
 const amount = program.amount || 0;
-
 
 
 // ********************* Static Functions  *********************** //
@@ -75,6 +82,50 @@ const getFilename = (src) => {
     const paths = src.split(/\//g);
 
     return paths[paths.length - 1];
+};
+
+/**
+ * read json content from a file that match the name
+ * @param filepath
+ * @param nameRegex
+ * @returns {null}
+ */
+const getJsonFromfile = (filepath, nameRegex) => {
+    const utcFiles = Fs.readdirSync(filepath);
+    let json;
+
+    for (let fileIdx = 0; fileIdx < utcFiles.length; fileIdx++) {
+        if (utcFiles[fileIdx].indexOf(nameRegex) !== -1) {
+            let str = Fs.readFileSync(Path.join(filepath, utcFiles[fileIdx]), {encoding: 'utf8'});
+
+            try {
+                json = JSON.parse(str)
+            } catch (errParseJson) {
+                console.error('parse json failed with %s', str);
+                return null;
+            }
+
+            return json;
+        }
+    }
+
+    return null;
+};
+
+const getUtcContent = (account) => {
+    let filepath;
+    let json;
+
+    filepath = Path.join(datadir, 'keystore');
+    json = getJsonFromfile(filepath, account);
+    if (typeof json === 'object' && json !== null) return json;
+
+    filepath = Path.join(accountdir, 'keystore');
+    json = getJsonFromfile(filepath, account);
+    if (typeof json === 'object' && json !== null) return json;
+
+    console.error('file %s should exist!', account);
+    throw new Error('file should exist');
 };
 
 /**
@@ -107,7 +158,6 @@ const copyUtcFile = (srcdir, destdir, file, accounts) => {
 };
 
 
-
 // *** Real Logic To Generate Account And The Geth Data Folder *** //
 
 /**
@@ -129,7 +179,11 @@ for (let amtId = 0; amtId < amount; amtId++) {
             console.log('generating account %s', amtId);
 
             const [, account] = stdout.match(GEN_ACCOUNT_RET_REGEX);
-            Fs.writeFileSync(Path.join(accountdir, 'public', `account-${account}.key`), account)
+            Fs.writeFileSync(Path.join(accountdir, 'public', `account-${account}.key`), account);
+
+            const utcContent = getUtcContent(account);
+            const privateKey = PkUtils.getPrivateKeyFromKeystore(utcContent, password);
+            Fs.writeFileSync(Path.join(accountdir, 'private', `private-${account}.key`), privateKey);
 
             cb(null)
         });

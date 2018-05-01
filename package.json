@@ -14,6 +14,7 @@
   "dependencies": {
     "async": "^2.6.0",
     "commander": "^2.15.1",
+    "ethereum-mnemonic-privatekey-utils": "^1.0.2",
     "fs-extra": "^6.0.0",
     "is": "^3.2.1",
     "mkdirp": "^0.5.1"
