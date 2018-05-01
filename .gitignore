@@ -3,3 +3,4 @@ account/private/UTC-*
 datastore/*
 private/*.key
 software
+genesis.json
