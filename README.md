@@ -76,6 +76,18 @@ Notice: The Imported Key's Password Need To Match That In File `account.password
 **OR** The Imported Account Will Not Show In The `personal.listAccounts`
 
 
+## Set Up `eth-netstats` View Mine Status
+
+In The `start-geth.sh`, Add Support For `eth-netstats`.
+
+Download `eth-netstats` From Github: https://github.com/cubedro/eth-netstats
+
+Then Yarn/Npm Install The Dependencies, Generate css/js/html Code With `grunt` (yarn global add grunt-cli).
+
+Then Start The Project With `WS_SECRET=thisisprivatekeyforgethstatus node app.js`.
+The WS_SECRET Is The Password For Geth To Push Data Into `eth-netstats`,
+And Is Also Configured In The File `start-geth.sh`.
+
 
 ## Make Sure Geth Alive!
 

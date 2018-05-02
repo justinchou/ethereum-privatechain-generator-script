@@ -6,6 +6,11 @@ RPCPORT=8545
 PPROFPORT=6060
 RPCAPI="admin,debug,eth,miner,net,personal,rpc,txpool,web3"
 
+NODENAME='privatechainnode'
+NODEPASS='thisisprivatekeyforgethstatus'
+STATSERVER='localhost:3000'
+ETHSTATS="${NODENAME}:${NODEPASS}@${STATSERVER}"
+
 DATADIR=./datastore
 PASSFILE=account.password
 
@@ -20,5 +25,6 @@ if [ ! -f ${GETH} ]; then
 GETH=geth
 fi
 
-#${GETH} ${SCRIPT} --mine --minerthreads 1 ${ARGVS}
+#${GETH} ${SCRIPT} --mine --minerthreads 1 ${ETHSTATS} ${ARGVS}
 ${GETH} ${SCRIPT} ${ARGVS}
+
