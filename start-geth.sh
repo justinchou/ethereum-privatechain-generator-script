@@ -11,6 +11,8 @@ NODEPASS='thisisprivatekeyforgethstatus'
 STATSERVER='localhost:3000'
 ETHSTATS="${NODENAME}:${NODEPASS}@${STATSERVER}"
 
+RPC_CORS_DOMAIN="http://localhost:8000"
+
 DATADIR=./datastore
 PASSFILE=account.password
 
@@ -25,6 +27,9 @@ if [ ! -f ${GETH} ]; then
 GETH=geth
 fi
 
-#${GETH} ${SCRIPT} --mine --minerthreads 1 ${ETHSTATS} ${ARGVS}
-${GETH} ${SCRIPT} ${ARGVS}
+echo ${GETH} ${SCRIPT} --mine --minerthreads 1 --ethstats="${ETHSTATS}" --rpccorsdomain=${RPC_CORS_DOMAIN} ${ARGVS}
+${GETH} ${SCRIPT} --mine --minerthreads 1 --ethstats="${ETHSTATS}" --rpccorsdomain=${RPC_CORS_DOMAIN} ${ARGVS}
+
+#echo ${GETH} ${SCRIPT} --ethstats="${ETHSTATS}" --rpccorsdomain=${RPC_CORS_DOMAIN} ${ARGVS}
+#${GETH} ${SCRIPT} --ethstats="${ETHSTATS}" --rpccorsdomain=${RPC_CORS_DOMAIN} ${ARGVS}
 

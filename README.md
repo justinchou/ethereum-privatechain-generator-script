@@ -89,6 +89,18 @@ The WS_SECRET Is The Password For Geth To Push Data Into `eth-netstats`,
 And Is Also Configured In The File `start-geth.sh`.
 
 
+## Set Up `explorer` View Trans Details
+
+In The `start-geth.sh`, Add Support For `explorer`.
+ 
+Download `explorer` From Github: https://github.com/carsenk/explorer
+
+Then Yarn/Npm And Bower Install The Dependencies, Run Project With Simple `npm start`.
+
+The Server Run At Port `8000` By Default, And The Host:Port Is Configured In The `start-geth.sh` File.
+It Sure Can Be Change As You Want. 
+
+
 ## Make Sure Geth Alive!
 
 Use Supervisor To Make Sure That The Geth Press Alive~
